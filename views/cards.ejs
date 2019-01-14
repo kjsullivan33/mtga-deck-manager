@@ -1,0 +1,21 @@
+<%- include('includes/head.ejs') %>
+<link rel="stylesheet" href="/css/decks.css">
+</head>
+
+<%- include('includes/navigation.ejs') %>
+<main class="centered">
+  <h1><%= deck.name %></h1>
+  <hr>
+  <div>
+    <img src="<%= deck.deckImage %>" alt="<%= deck.name %>">
+  </div>
+  <h2><%= deck.colors %></h2>
+  <div class="card-list">
+        <% for (let card of deck.mainDeck) { %>
+              <h3 class="card__name">
+                <%= card.name %> x <%= card.quantity %>
+              </h3>
+            <% } %>
+          </div>
+</main>
+<%- include('includes/end.ejs') %>

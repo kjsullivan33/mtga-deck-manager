@@ -3,7 +3,7 @@ const path = require('path');
 
 const p = path.join(path.dirname(process.mainModule.filename), 'data', 'decks.json');
 
-const getProductsFromFile = (cb) => {
+const getDecksFromFile = (cb) => {
 
   fs.readFile(p, (err, fileContent) => {
     if (err) {
@@ -14,21 +14,28 @@ const getProductsFromFile = (cb) => {
 }
 
 
-module.exports = class Product {
+module.exports = class Deck {
   constructor(deck) {
     this.deck = deck;
   }
 
   save() {
-    getProductsFromFile(products => {
-      products.push(this);
-      fs.writeFile(p, JSON.stringify(products), (err) => {
+    getDecksFromFile(decks => {
+      decks.push(this);
+      fs.writeFile(p, JSON.stringify(decks), (err) => {
         console.log(err);
       });
     });
   }
 
   static fetchAll(cb) {
-    getProductsFromFile(cb);
+    getDecksFromFile(cb);
+  }
+
+  static findById(id, cb) {
+    getDecksFromFile(decks => {
+      const deck = decks.find(d => d.id === id);
+      cb(deck);
+    })
   }
 }

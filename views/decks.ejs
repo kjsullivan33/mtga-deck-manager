@@ -1,0 +1,35 @@
+<%- include('includes/head.ejs') %>
+<link rel="stylesheet" href="/css/decks.css">
+</head>
+
+<%- include('includes/navigation.ejs') %>
+
+<main>
+    <% if (decks.length > 0) { %> 
+      <div class="grid">
+        <% for (let deck of decks) { %>
+          <article class="card product-item">
+            <header class="card__header">
+              <h1 class="deck__name">
+                <%= deck.name %>
+                </h1>
+              </header>
+              <div class="card__image">
+                <img src="<%= deck.deckImage %>" alt="<%= deck.name %>">
+              </div>
+              <div class="card__content">
+                <h2 class="deck__colors">
+                  <%= deck.deckColors %>
+                </h2>
+                <p class="deck__description">
+                </p>
+              </div>
+              <div class="card__actions">
+                <a href="/cards/<%= deck.id %>" class="btn">Details</a>
+              </div>
+            </article>
+            <% } %>
+          </div>
+   <% } else { %><h1>No decks</h1>  <% } %>
+ 
+<%- include('includes/end.ejs') %>
